@@ -1,0 +1,14 @@
+# Local exploration overlay on top of the upstream cpu/vllm guide config.
+# Swaps in a small, ungated model and shrinks resources to fit a laptop-sized
+# minikube node (the upstream defaults want 64 CPU / 64Gi per replica).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../vllm
+
+patches:
+  - path: patch-demo.yaml
+    target:
+      kind: Deployment
+      name: optimized-baseline-cpu-vllm-decode

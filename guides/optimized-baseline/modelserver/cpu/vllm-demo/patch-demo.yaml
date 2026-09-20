@@ -1,0 +1,38 @@
+- op: replace
+  path: /spec/replicas
+  value: 1
+- op: add
+  path: /spec/strategy
+  value:
+    type: Recreate
+- op: replace
+  path: /spec/template/spec/containers/0/args
+  value:
+    - "Qwen/Qwen2.5-0.5B-Instruct"
+    - "--disable-access-log-for-endpoints=/health,/metrics,/v1/models"
+    - "--disable-hybrid-kv-cache-manager"
+    - "--max_model_len=2048"
+    - "--dtype=float32"
+    - "--kv-cache-memory-bytes=268435456"
+- op: replace
+  path: /spec/template/spec/containers/0/env
+  value:
+    - name: VLLM_CPU_NUM_OF_RESERVED_CPU
+      value: "0"
+- op: replace
+  path: /spec/template/spec/containers/0/resources
+  value:
+    limits:
+      memory: 6500Mi
+      cpu: "2"
+    requests:
+      cpu: "1"
+      memory: 5500Mi
+- op: replace
+  path: /spec/template/spec/volumes/0/emptyDir
+  value:
+    medium: Memory
+    sizeLimit: 1Gi
+- op: replace
+  path: /spec/template/spec/containers/0/startupProbe/failureThreshold
+  value: 60

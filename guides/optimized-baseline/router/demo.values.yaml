@@ -1,0 +1,19 @@
+# Local exploration override: shrinks the router chart's default resource
+# requests (EPP: 4 CPU/8Gi, Envoy sidecar: 4 CPU/8Gi) to fit a laptop-sized
+# minikube node.
+router:
+  epp:
+    resources:
+      requests:
+        cpu: "250m"
+        memory: 256Mi
+      limits:
+        memory: 512Mi
+
+  proxy:
+    resources:
+      requests:
+        cpu: "250m"
+        memory: 256Mi
+      limits:
+        memory: 512Mi
