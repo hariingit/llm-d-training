@@ -21,6 +21,9 @@ These files mirror their location inside an `llm-d` checkout:
 - `guides/optimized-baseline/router/demo.values.yaml` — Helm values override that
   shrinks the router chart's default EPP/Envoy sidecar resource requests (4 CPU/8Gi each
   by default) down to something a small cluster can schedule.
+- [`rag-demo/`](rag-demo/README.md) — minimal RAG (Retrieval-Augmented Generation) example
+  that queries the model deployed above: embed docs -> FAISS search -> vLLM (via the
+  llm-d router) generates the answer. Also has a glossary of core LLM concepts.
 
 ## Usage
 
